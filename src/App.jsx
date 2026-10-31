@@ -1,122 +1,89 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import Header from "./components/header";
+import CarList from "./components/carlist";
+import Cart from "./components/cart";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const coches = [
+        {
+            id: 1,
+            nombre: "Ferrari LaFerrari",
+            precio: 500000,
+            imagen: "/imagenes/ferrari_laferrari.webp"
+        },
+        {
+            id: 2,
+            nombre: "Lamborghini Temerario",
+            precio: 320000,
+            imagen: "/imagenes/lamborghini.jpg"
+        },
+        {
+            id: 3,
+            nombre: "Porsche 911 GT Turbo S",
+            precio: 195000,
+            imagen: "/imagenes/porsche.jpg"
+        }
+    ];
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    const [carrito, setCarrito] = useState(() => {
+        const guardado = localStorage.getItem("carrito");
+        return guardado ? JSON.parse(guardado) : [];
+    });
 
-      <div className="ticks"></div>
+    const [busqueda, setBusqueda] = useState("");
+    const [modoOscuro, setModoOscuro] = useState(false);
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+    useEffect(() => {
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+    }, [carrito]);
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    function comprar(coche) {
+        const compra = {
+            ...coche,
+            id: Date.now()
+        };
+
+        setCarrito([...carrito, compra]);
+    }
+
+    function eliminar(id) {
+        setCarrito(carrito.filter((compra) => compra.id !== id));
+    }
+
+    const cantidad = carrito.length;
+
+    const total = carrito.reduce(
+        (suma, compra) => suma + compra.precio,
+        0
+    );
+
+    return (
+        <div className={modoOscuro ? "app oscuro" : "app"}>
+            <Header
+                modoOscuro={modoOscuro}
+                cambiarModo={() => setModoOscuro(!modoOscuro)}
+            />
+
+            <CarList
+                coches={coches}
+                busqueda={busqueda}
+                setBusqueda={setBusqueda}
+                onComprar={comprar}
+            />
+
+            <Cart
+                carrito={carrito}
+                cantidad={cantidad}
+                total={total}
+                onEliminar={eliminar}
+            />
+
+            <footer>
+                © 2026 LA SUK SHOP · Exclusividad sobre ruedas.
+            </footer>
+        </div>
+    );
 }
 
-export default App
+export default App;
