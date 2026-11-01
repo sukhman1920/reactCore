@@ -1,16 +1,31 @@
-# React + Vite
+# M3 · Reactor Core — LA SUK SHOP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+LA SUK SHOP es una tienda de coches de lujo desarrollada con React.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+La aplicación permite ver un catálogo de coches, buscar modelos, añadirlos al carrito, eliminar compras y consultar el precio total.
 
-## React Compiler
+## Uso de IA
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Durante el desarrollo del proyecto he utilizado ChatGPT como herramienta de apoyo.
 
-## Expanding the ESLint configuration
+**Qué he delegado:**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Ayuda para organizar la web con componentes de React.
+- Propuestas iniciales de código para gestionar el estado, las props y los efectos.
+- Ayuda para buscar y solucionar errores.
+
+**Prompts utilizados:**
+
+- Ayúdame a reconstruir mi aplicación anterior en React utilizando componentes, props, estado y efectos, manteniendo el código.
+- Explícame cómo funcionan useState, useEffect y la comunicación entre componentes en mi aplicación.
+
+**Verificación:**
+He probado la aplicación en el navegador utilizando Vite y he comprobado las funcionalidades principales, como la búsqueda, el carrito, la eliminación de coches y el cambio de tema.
+
+**Trabajo realizado personalmente:**
+He configurado el proyecto con Vite, creado la estructura de archivos, integrado los componentes, adaptado el código a mi aplicación anterior y realizado pruebas y modificaciones durante el desarrollo.
+
+He utilizado la IA como herramienta de apoyo, pero he revisado e integrado el código generado en el proyecto.
+
