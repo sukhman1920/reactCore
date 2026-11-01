@@ -4,7 +4,7 @@ function CarCard({ coche, onComprar }) {
             <h2>{coche.nombre}</h2>
             <img src={coche.imagen} alt={coche.nombre} />
             <p>{coche.precio.toLocaleString("es-ES")} $</p>
-            <button onClick={() => onComprar(coche)}>
+            <button type="button" onClick={() => onComprar(coche)}>
                 Comprar
             </button>
         </div>
