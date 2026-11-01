@@ -10,7 +10,7 @@ function CarList({ coches, busqueda, setBusqueda, onComprar }) {
             <div className="busqueda">
                 <input
                     type="text"
-                    placeholder="Buscar coche"
+                    placeholder="Buscar Coche"
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                 />
